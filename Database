@@ -1,0 +1,56 @@
+CREATE DATABASE IF NOT EXISTS student_db;
+USE school_db;
+
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    user_address TEXT NOT NULL,
+    birthdate DATE NOT NULL,
+    course VARCHAR(100) NOT NULL,
+    profile_image VARCHAR(255) DEFAULT NULL,
+    user_password VARCHAR(255) NOT NULL,
+    verification_code VARCHAR(100) DEFAULT NULL,
+    is_verified BOOLEAN DEFAULT FALSE,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Admin users table
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Tasks table
+CREATE TABLE IF NOT EXISTS tasks (
+    task_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    due_date DATETIME NOT NULL,
+    assigned_to INT,
+    status ENUM('pending', 'in_progress', 'completed', 'overdue') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (assigned_to) REFERENCES students(student_id) ON DELETE SET NULL
+);
+
+-- Task submissions table
+CREATE TABLE IF NOT EXISTS task_submissions (
+    submission_id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT NOT NULL,
+    student_id INT NOT NULL,
+    submission_text TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    grade DECIMAL(5,2),
+    feedback TEXT,
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+);

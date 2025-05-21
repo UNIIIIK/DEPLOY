@@ -1,0 +1,75 @@
+/* General Page Styling */
+body {
+    background: linear-gradient(to right, #210F37, #4F1C51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Login Container */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Login Card */
+.login-card {
+    text-align: center;
+}
+
+.login-card h3 {
+    font-weight: bold;
+    color: #210F37;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #A55B4B;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #DCA06D;
+    box-shadow: 0 0 8px rgba(220, 160, 109, 0.5);
+}
+
+/* Button Styling */
+.btn-primary {
+    background: linear-gradient(to right, #A55B4B, #DCA06D);
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #DCA06D, #A55B4B);
+    transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
